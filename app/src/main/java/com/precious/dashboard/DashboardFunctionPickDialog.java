@@ -10,10 +10,16 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.precious.dashboard.db.entity.DashboardFunction;
+
+import java.util.List;
 
 public class DashboardFunctionPickDialog extends DialogFragment {
-
-
 
     private View rootView;
     private MainActivity activity;
@@ -33,8 +39,8 @@ public class DashboardFunctionPickDialog extends DialogFragment {
                 .setTitle(R.string.dashboard_dialog_title)
                 .create();
         alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
         alertDialog.setOnShowListener(dialog -> onDialogShow(alertDialog));
+
         return alertDialog;
     }
 

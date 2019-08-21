@@ -11,10 +11,9 @@ import androidx.room.PrimaryKey;
 public class User {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int userId;
+    private int id;
 
-    private String username;
+    private int username;
 
     @ColumnInfo(name = "password")
     private String userPassword;
@@ -27,24 +26,24 @@ public class User {
     }
 
     @Ignore
-    public User(String username, String password){
+    public User(int username, String password){
         this.username = username;
         this.userPassword = password;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getUsername() {
+    public int getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(int username) {
         this.username = username;
     }
 

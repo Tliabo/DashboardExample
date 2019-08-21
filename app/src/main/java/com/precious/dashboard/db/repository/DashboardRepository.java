@@ -49,16 +49,15 @@ public class DashboardRepository {
         new DeleteDashboardAsyncTask(dashboardDAO).execute(dashboard);
     }
 
-    public LiveData<Dashboard> getDashboard(String username) {
+    public LiveData<Dashboard> getDashboard(int username) {
         user = database.userDAO().getUser(username);
-        dashboard = dashboardDAO.getDashboard(user.getValue().getUserId());
+        dashboard = dashboardDAO.getDashboard(user.getValue().getUsername());
         return dashboard;
     }
+
     public LiveData<List<DashboardFunction>> getAllDashboardFunctions(){
         return  allDashboardFunctions;
     }
-
-
 
     private static class InsertDashboardAsyncTask extends AsyncTask<Dashboard, Void, Void> {
 

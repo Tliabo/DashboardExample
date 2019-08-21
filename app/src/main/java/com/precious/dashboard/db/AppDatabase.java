@@ -72,7 +72,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
             //app have to be reinstalled, if you add a new dummy
 
-            userDAO.insert(new User("666999", "test"));
+            userDAO.insert(new User(666999, "test"));
 
             dashboardFunctionDAO.insert(new DashboardFunction("Kalender", R.drawable.ic_outline_calender));
             dashboardFunctionDAO.insert(new DashboardFunction("Zeiterfassung", R.drawable.ic_outline_timer));

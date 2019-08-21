@@ -1,10 +1,17 @@
 package com.precious.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.ImageButton;
+
+import com.precious.dashboard.db.entity.DashboardFunction;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initData();
+
+        chooseFunction();
     }
 
     public void chooseFunction(){
@@ -37,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initData() {
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+        final DashboardFunctionAdapter adapter = new DashboardFunctionAdapter();
+        recyclerView.setAdapter(adapter);
+
         dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
+        dashboardViewModel.getAllFunctions().observe(this, adapter::setDashboardFunctions);
     }
 }
