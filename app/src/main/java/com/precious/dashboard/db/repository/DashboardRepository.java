@@ -19,11 +19,11 @@ import java.util.List;
 public class DashboardRepository {
     private DashboardDAO dashboardDAO;
     private DashboardFunctionDAO dashboardFunctionDAO;
+    private UserDAO userDAO;
 
     private LiveData<Dashboard> dashboard;
     private LiveData<List<DashboardFunction>> allDashboardFunctions;
 
-    private LiveData<User> user;
     private AppDatabase database;
 
     public DashboardRepository(Application application){
@@ -31,9 +31,9 @@ public class DashboardRepository {
 
         dashboardFunctionDAO = database.dashboardFunctionDAO();
         dashboardDAO = database.dashboardDAO();
+        userDAO = database.userDAO();
 
         allDashboardFunctions = dashboardFunctionDAO.getAllFunctions();
-
 
     }
 
@@ -50,8 +50,7 @@ public class DashboardRepository {
     }
 
     public LiveData<Dashboard> getDashboard(int username) {
-        user = database.userDAO().getUser(username);
-        dashboard = dashboardDAO.getDashboard(user.getValue().getUsername());
+        dashboard = dashboardDAO.getDashboard(userDAO.getUser(username).getValue().getUsername());
         return dashboard;
     }
 

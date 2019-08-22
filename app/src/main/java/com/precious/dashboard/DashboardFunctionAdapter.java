@@ -14,44 +14,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardFunctionAdapter
-        extends RecyclerView.Adapter<DashboardFunctionAdapter.ViewHolder>{
+        extends RecyclerView.Adapter<DashboardFunctionAdapter.ViewHolder> {
 
-    private List<DashboardFunction> dashboardFunctions = new ArrayList<>();
+    private List<DashboardDialogItem> dashboardDialogItemList;
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView imageViewFunction;
+        private TextView textViewFunctionName;
+
+        public ViewHolder(View view) {
+            super(view);
+            imageViewFunction = view.findViewById(R.id.imageView);
+            textViewFunctionName = view.findViewById(R.id.functionName);
+        }
+    }
+
+    public DashboardFunctionAdapter(List<DashboardDialogItem> itemsList) {
+        dashboardDialogItemList = itemsList;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_functions, parent, false);
+                .inflate(R.layout.dashboard_dialog_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        DashboardFunction dashboardFunction = dashboardFunctions.get(position);
-        holder.TextViewFunctionName.setText(dashboardFunction.getFunctionName());
-        holder.imageViewFunctionName.setImageResource(dashboardFunction.getFunctionIcon());
+        DashboardDialogItem dashboardDialogItem = dashboardDialogItemList.get(position);
+
+        holder.imageViewFunction.setImageResource(dashboardDialogItem.getImageResource());
+        holder.textViewFunctionName.setText(dashboardDialogItem.getFunctionName());
     }
 
     @Override
     public int getItemCount() {
-        return dashboardFunctions.size();
-    }
-
-    public void setDashboardFunctions(List<DashboardFunction> dashboardFunctions){
-        this.dashboardFunctions = dashboardFunctions;
-        notifyDataSetChanged();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView TextViewFunctionName;
-        private ImageView imageViewFunctionName;
-
-        public ViewHolder(View view) {
-            super(view);
-            TextViewFunctionName = view.findViewById(R.id.functionName);
-            imageViewFunctionName = view.findViewById(R.id.imageFunction);
-        }
-
+        return dashboardDialogItemList.size();
     }
 
 }

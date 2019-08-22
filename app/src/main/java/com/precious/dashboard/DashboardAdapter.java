@@ -1,21 +1,11 @@
 package com.precious.dashboard;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Adapter;
 
-import androidx.recyclerview.widget.RecyclerView;
+import com.precious.dashboard.db.entity.Dashboard;
 
-import com.precious.dashboard.db.entity.DashboardFunction;
+public abstract class DashboardAdapter implements Adapter {
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class DashboardAdapter extends Adapter {
-
-
+    private Dashboard dashboard = new Dashboard();
 
 }

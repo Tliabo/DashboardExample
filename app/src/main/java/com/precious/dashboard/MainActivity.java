@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -22,28 +23,55 @@ public class MainActivity extends AppCompatActivity {
     private static final int CHANGE_DASHBOARD_FUNCTION_REQUEST = 1;
     private static final String CHANGE_DASHBOARD_FUNCTION_DIALOG = "change_dashboard";
 
-    private int username;
-    private int functionAmount;
+    private int username = 666999;
 
     private DashboardViewModel dashboardViewModel;
 
     private List<ImageButton> imageButtons = new ArrayList<>();
+    private ImageButton imageButton1;
+    private ImageButton imageButton2;
+    private ImageButton imageButton3;
+    private ImageButton imageButton4;
+    private ImageButton imageButton5;
+    private ImageButton imageButton6;
+    private ImageButton imageButton7;
+    private ImageButton imageButton8;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DashboardFunctionAdapter adapter = new DashboardFunctionAdapter();
+//        DashboardFunctionAdapter adapter = new DashboardFunctionAdapter();
 
         dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
-        dashboardViewModel.getDashboard(username).observe(this, new Observer<Dashboard>() {
-            @Override
-            public void onChanged(List<Dashboard> dashboards) {
-                adapter.setDashboardFunctions(dashboards);
-            }
-        });
+//        dashboardViewModel.getDashboard(username);
 
+        initButtons();
+
+    }
+
+    private void initButtons() {
+        imageButton1 = findViewById(R.id.imageButton1);
+        imageButton2 = findViewById(R.id.imageButton2);
+        imageButton3 = findViewById(R.id.imageButton3);
+        imageButton4 = findViewById(R.id.imageButton4);
+        imageButton5 = findViewById(R.id.imageButton5);
+        imageButton6 = findViewById(R.id.imageButton6);
+        imageButton7 = findViewById(R.id.imageButton7);
+        imageButton8 = findViewById(R.id.imageButton8);
+
+        imageButton1.setOnClickListener((View v) -> onClickListener(imageButton1));
+        imageButton2.setOnClickListener((View v) -> onClickListener(imageButton2));
+        imageButton3.setOnClickListener((View v) -> onClickListener(imageButton3));
+        imageButton4.setOnClickListener((View v) -> onClickListener(imageButton4));
+        imageButton5.setOnClickListener((View v) -> onClickListener(imageButton5));
+        imageButton6.setOnClickListener((View v) -> onClickListener(imageButton6));
+        imageButton7.setOnClickListener((View v) -> onClickListener(imageButton7));
+        imageButton8.setOnClickListener((View v) -> onClickListener(imageButton8));
+
+        addImageButtonsToList();
     }
 
     public void chooseFunction(){
@@ -51,15 +79,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), CHANGE_DASHBOARD_FUNCTION_DIALOG);
     }
 
-    void initImageButtons(){
-        ImageButton imageButton1 = findViewById(R.id.imageButton1);
-        ImageButton imageButton2 = findViewById(R.id.imageButton2);
-        ImageButton imageButton3 = findViewById(R.id.imageButton3);
-        ImageButton imageButton4 = findViewById(R.id.imageButton4);
-        ImageButton imageButton5 = findViewById(R.id.imageButton5);
-        ImageButton imageButton6 = findViewById(R.id.imageButton6);
-        ImageButton imageButton7 = findViewById(R.id.imageButton7);
-        ImageButton imageButton8 = findViewById(R.id.imageButton8);
+    void addImageButtonsToList(){
 
         imageButtons.add(imageButton1);
         imageButtons.add(imageButton2);
@@ -87,9 +107,9 @@ public class MainActivity extends AppCompatActivity {
             String position7 = data.getStringExtra(DashboardFunctionPickDialog.EXTRA_POS7);
             String position8 = data.getStringExtra(DashboardFunctionPickDialog.EXTRA_POS8);
 
-            Dashboard dashboard = new Dashboard(userId, )
+            Dashboard dashboard = new Dashboard(username,8, position1, position2, position3, position4, position5, position6, position7, position8);
 
-            productViewModel.insert(product);
+            dashboardViewModel.update(dashboard);
 
             Toast.makeText(this, "Function saved", Toast.LENGTH_SHORT).show();
         } else {
@@ -98,59 +118,59 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void onClick(ImageButton button){
+    public void onClickListener(ImageButton button){
         Intent intent;
+        Toast toast;
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
         // Handle navigation view item clicks here.
-        switch (button.getContentDescription()) {
-            case R.id.nav_erp:
-                intent = new Intent(DashboardActivity.this, ERPActivity.class);
-                startActivity(intent);
-
-                break;
-            case R.id.nav_webmail:
-                intent = new Intent(DashboardActivity.this, WebmailActivity.class);
-                startActivity(intent);
-
-                break;
-            case R.id.nav_dashboard:
-                ft.replace(
-                        R.id.fragment_container, new DashboardFragment()
-                ).commit();
-                break;
-            case R.id.nav_timetracking:
-                intent = new Intent(DashboardActivity.this, TimeTrackingActivity.class);
-//                intent.putExtra("userId", userId);
-                startActivity(intent);
-
-                break;
-            case R.id.nav_message:
-                intent = new Intent(DashboardActivity.this, MessageActivity.class);
-                startActivity(intent);
-
-                break;
-            case R.id.nav_shop:
-                intent = new Intent(DashboardActivity.this, ShopActivity.class);
-                startActivity(intent);
-
-                break;
-            case R.id.nav_settings:
-
-                break;
-            case R.id.nav_feedback:
-                intent = new Intent(DashboardActivity.this, FeedbackActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.nav_calender:
-                intent = new Intent(DashboardActivity.this, CalenderActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.nav_logout:
-                Toast toast = Toast.makeText(this, "Logout", Toast.LENGTH_SHORT);
+        switch (button.getContentDescription().toString()) {
+            case "Kalender":
+                toast = Toast.makeText(this, "Kalender", Toast.LENGTH_SHORT);
                 toast.show();
+                break;
+            case "Dashboard":
+                toast = Toast.makeText(this, "Dashboard", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case "Information":
+                toast = Toast.makeText(this, "Information", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case "Shop":
+                toast = Toast.makeText(this, "Shop", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case "TimeTracking":
+                toast = Toast.makeText(this, "TimeTracking", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case "ERP":
+                toast = Toast.makeText(this, "ERP", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case "Mail":
+                toast = Toast.makeText(this, "Mail", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case "Settings":
+                toast = Toast.makeText(this, "Settings", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case "Feedback":
+                toast = Toast.makeText(this, "Feedback", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case "Logout":
+                toast = Toast.makeText(this, "Logout", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case "default":
+                toast = Toast.makeText(this, "default", Toast.LENGTH_SHORT);
+                toast.show();
+                chooseFunction();
                 break;
         }
     }

@@ -49,6 +49,11 @@ public class Dashboard {
     @ForeignKey(entity = DashboardFunction.class, parentColumns = "function_name", childColumns = "position8")
     private String position8;
 
+    public Dashboard(){
+
+    }
+
+    @Ignore
     public Dashboard(int userId, int functionsAmount,
                      String position1,
                      String position2,

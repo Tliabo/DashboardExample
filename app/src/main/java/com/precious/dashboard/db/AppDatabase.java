@@ -23,7 +23,7 @@ import com.precious.dashboard.db.entity.User;
                 User.class,
                 Dashboard.class,
                 DashboardFunction.class
-        }, version = 1, exportSchema = false)
+        }, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String APP_DB_NAME = "app_database";
@@ -71,7 +71,6 @@ public abstract class AppDatabase extends RoomDatabase {
         protected Void doInBackground(Void... voids) {
 
             //app have to be reinstalled, if you add a new dummy
-
             userDAO.insert(new User(666999, "test"));
 
             dashboardFunctionDAO.insert(new DashboardFunction("Kalender", R.drawable.ic_outline_calender));
@@ -87,8 +86,6 @@ public abstract class AppDatabase extends RoomDatabase {
             dashboardFunctionDAO.insert(new DashboardFunction("default", R.drawable.ic_outline_add_circle));
 
             dashboardDAO.insert(new Dashboard(666999, 6,"default","default","default","default","default","default","default","default"));
-
-
 
             return null;
         }
