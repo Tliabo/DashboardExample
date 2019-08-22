@@ -1,8 +1,11 @@
 package com.precious.dashboard.db.entity;
 
+import android.widget.ImageButton;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
@@ -155,4 +158,6 @@ public class Dashboard {
     public void setPosition8(String position8) {
         this.position8 = position8;
     }
+
+
 }

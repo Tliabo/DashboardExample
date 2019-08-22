@@ -30,7 +30,6 @@ public class DashboardFunctionAdapter
         DashboardFunction dashboardFunction = dashboardFunctions.get(position);
         holder.TextViewFunctionName.setText(dashboardFunction.getFunctionName());
         holder.imageViewFunctionName.setImageResource(dashboardFunction.getFunctionIcon());
-
     }
 
     @Override
@@ -49,9 +48,8 @@ public class DashboardFunctionAdapter
 
         public ViewHolder(View view) {
             super(view);
-            TextViewFunctionName = view.findViewById(R.id.textViewFunctionName);
-            imageViewFunctionName = view.findViewById(R.id.imageViewFunction);
-
+            TextViewFunctionName = view.findViewById(R.id.functionName);
+            imageViewFunctionName = view.findViewById(R.id.imageFunction);
         }
 
     }

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Dashboard</string>
     <string name="dashboard_dialog_title">Set Function</string>
+    <string name="shop">Shop</string>
+    <string name="erp">ERP</string>
+    <string name="kalender">Kalender</string>
+    <string name="zeit_erfassen">Zeit erfassen</string>
+    <string name="informationen">Informationen</string>
 </resources>
