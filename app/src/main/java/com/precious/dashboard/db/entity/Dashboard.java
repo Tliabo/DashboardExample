@@ -55,14 +55,10 @@ public class Dashboard {
 
     @Ignore
     public Dashboard(int userId, int functionsAmount,
-                     String position1,
-                     String position2,
-                     String position3,
-                     String position4,
-                     String position5,
-                     String position6,
-                     String position7,
-                     String position8) {
+                     String position1, String position2,
+                     String position3, String position4,
+                     String position5, String position6,
+                     String position7, String position8) {
         this.userId = userId;
         this.functionsAmount = functionsAmount;
 

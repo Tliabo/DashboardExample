@@ -1,12 +1,14 @@
 package com.precious.dashboard;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,7 +40,8 @@ public class DashboardFunctionPickDialog extends AppCompatDialogFragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.Adapter adapter;
+    private DashboardFunctionAdapter adapter;
+    private DialogListener dialogListener;
 
     @NonNull
     @Override
@@ -54,6 +57,23 @@ public class DashboardFunctionPickDialog extends AppCompatDialogFragment {
 
         addItems();
 
+        buildRecyclerView(view);
+
+        return builder.create();
+    }
+
+    private void addItems() {
+        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_calender, "Kalender"));
+        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_timer, "TimeTracking"));
+        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_email, "Mail"));
+        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_message, "Information"));
+        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_shopping_cart, "Shop"));
+        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_stelle_wechseln, "Stellenangebote"));
+        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_launch, "ERP"));
+        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_add_circle, "default"));
+    }
+
+    private void buildRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.recyclerView);
 
         layoutManager = new LinearLayoutManager(getContext());
@@ -62,17 +82,26 @@ public class DashboardFunctionPickDialog extends AppCompatDialogFragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        return builder.create();
+        adapter.setOnItemClickListener(
+                position -> dialogListener.applyFunction(
+                        dialogItems.get(position).getImageResource(),
+                        dialogItems.get(position).getFunctionName()
+                ));
     }
 
-    private void addItems() {
-        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_timer, "TimeTracking"));
-        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_email, "Email"));
-        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_message, "Information"));
-        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_shopping_cart, "Shop"));
-        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_stelle_wechseln, "Stellenangebote"));
-        dialogItems.add(new DashboardDialogItem(R.drawable.ic_outline_launch, "ERP"));
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            dialogListener = (DialogListener) context;
+        } catch (Exception e) {
+            throw new ClassCastException(context.toString() +
+                    "must implement DialogListener");
+        }
     }
 
-
+    public interface DialogListener {
+        void applyFunction(int imageSource, String functionName);
+    }
 }

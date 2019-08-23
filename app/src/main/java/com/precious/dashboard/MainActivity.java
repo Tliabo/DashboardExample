@@ -15,10 +15,12 @@ import android.widget.Toast;
 
 import com.precious.dashboard.db.entity.Dashboard;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DashboardFunctionPickDialog.DialogListener, View.OnClickListener{
 
     private static final int CHANGE_DASHBOARD_FUNCTION_REQUEST = 1;
     private static final String CHANGE_DASHBOARD_FUNCTION_DIALOG = "change_dashboard";
@@ -36,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton imageButton6;
     private ImageButton imageButton7;
     private ImageButton imageButton8;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
         imageButton7 = findViewById(R.id.imageButton7);
         imageButton8 = findViewById(R.id.imageButton8);
 
-        imageButton1.setOnClickListener((View v) -> onClickListener(imageButton1));
-        imageButton2.setOnClickListener((View v) -> onClickListener(imageButton2));
-        imageButton3.setOnClickListener((View v) -> onClickListener(imageButton3));
-        imageButton4.setOnClickListener((View v) -> onClickListener(imageButton4));
-        imageButton5.setOnClickListener((View v) -> onClickListener(imageButton5));
-        imageButton6.setOnClickListener((View v) -> onClickListener(imageButton6));
-        imageButton7.setOnClickListener((View v) -> onClickListener(imageButton7));
-        imageButton8.setOnClickListener((View v) -> onClickListener(imageButton8));
+        imageButton1.setOnClickListener(this);
+        imageButton2.setOnClickListener(this);
+        imageButton3.setOnClickListener(this);
+        imageButton4.setOnClickListener(this);
+        imageButton5.setOnClickListener(this);
+        imageButton6.setOnClickListener(this);
+        imageButton7.setOnClickListener(this);
+        imageButton8.setOnClickListener(this);
 
         addImageButtonsToList();
     }
@@ -90,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
         imageButtons.add(imageButton7);
         imageButtons.add(imageButton8);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -118,61 +118,58 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void onClickListener(ImageButton button){
+
+    @Override
+    public void onClick(View v) {
         Intent intent;
         Toast toast;
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-        // Handle navigation view item clicks here.
-        switch (button.getContentDescription().toString()) {
+        switch (v.getContentDescription().toString()) {
             case "Kalender":
-                toast = Toast.makeText(this, "Kalender", Toast.LENGTH_SHORT);
-                toast.show();
+//                toast = Toast.makeText(this, "Kalender", Toast.LENGTH_SHORT);
+//                toast.show();
                 break;
-            case "Dashboard":
-                toast = Toast.makeText(this, "Dashboard", Toast.LENGTH_SHORT);
-                toast.show();
+            case "Stellenangebote":
+//                toast = Toast.makeText(this, "Stellenangebote", Toast.LENGTH_SHORT);
+//                toast.show();
                 break;
             case "Information":
-                toast = Toast.makeText(this, "Information", Toast.LENGTH_SHORT);
-                toast.show();
+//                toast = Toast.makeText(this, "Information", Toast.LENGTH_SHORT);
+//                toast.show();
                 break;
             case "Shop":
-                toast = Toast.makeText(this, "Shop", Toast.LENGTH_SHORT);
-                toast.show();
+//                toast = Toast.makeText(this, "Shop", Toast.LENGTH_SHORT);
+//                toast.show();
                 break;
             case "TimeTracking":
-                toast = Toast.makeText(this, "TimeTracking", Toast.LENGTH_SHORT);
-                toast.show();
+//                toast = Toast.makeText(this, "TimeTracking", Toast.LENGTH_SHORT);
+//                toast.show();
                 break;
             case "ERP":
-                toast = Toast.makeText(this, "ERP", Toast.LENGTH_SHORT);
-                toast.show();
+//                toast = Toast.makeText(this, "ERP", Toast.LENGTH_SHORT);
+//                toast.show();
                 break;
             case "Mail":
-                toast = Toast.makeText(this, "Mail", Toast.LENGTH_SHORT);
-                toast.show();
-                break;
-            case "Settings":
-                toast = Toast.makeText(this, "Settings", Toast.LENGTH_SHORT);
-                toast.show();
+//                toast = Toast.makeText(this, "Mail", Toast.LENGTH_SHORT);
+//                toast.show();
                 break;
             case "Feedback":
-                toast = Toast.makeText(this, "Feedback", Toast.LENGTH_SHORT);
-                toast.show();
-                break;
-            case "Logout":
-                toast = Toast.makeText(this, "Logout", Toast.LENGTH_SHORT);
-                toast.show();
+//                toast = Toast.makeText(this, "Feedback", Toast.LENGTH_SHORT);
+//                toast.show();
                 break;
             case "default":
-                toast = Toast.makeText(this, "default", Toast.LENGTH_SHORT);
-                toast.show();
+//                toast = Toast.makeText(this, "default", Toast.LENGTH_SHORT);
+//                toast.show();
                 chooseFunction();
                 break;
         }
     }
 
+    @Override
+    public void applyFunction(int imageSource, String functionName) {
+
+    }
 }

@@ -1,7 +1,5 @@
 package com.precious.dashboard;
 
-import android.widget.ImageView;
-
 public class DashboardDialogItem {
 
     private int imageResource;
@@ -19,4 +17,6 @@ public class DashboardDialogItem {
     public String getFunctionName() {
         return functionName;
     }
+
+
 }
