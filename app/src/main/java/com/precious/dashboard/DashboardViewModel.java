@@ -1,7 +1,6 @@
 package com.precious.dashboard;
 
 import android.app.Application;
-import android.provider.ContactsContract;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -17,18 +16,16 @@ import java.util.List;
 public class DashboardViewModel extends AndroidViewModel {
 
     private DashboardRepository repository;
-
+    private LiveData<List<Dashboard>> allDashboards;
     private LiveData<List<DashboardFunction>> allFunctions;
-
     private List<ImageButton> imageButtons;
-
-    private LiveData<Dashboard> dashboard;
 
     public DashboardViewModel(@NonNull Application application) {
         super(application);
 
         repository = new DashboardRepository(application);
         allFunctions = repository.getAllDashboardFunctions();
+        allDashboards = repository.getAllDashboards();
 
     }
 
@@ -56,8 +53,8 @@ public class DashboardViewModel extends AndroidViewModel {
         return imageButtons;
     }
 
-    public LiveData<Dashboard> getDashboard(int username){
-        return repository.getDashboard(username);
+    public LiveData<List<Dashboard>> getAllDashboards(){
+        return allDashboards;
     }
 
     private void addNewFunctionButton(String functionName, int imageSource){

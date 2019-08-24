@@ -21,19 +21,18 @@ public class DashboardRepository {
     private DashboardFunctionDAO dashboardFunctionDAO;
     private UserDAO userDAO;
 
-    private LiveData<Dashboard> dashboard;
+    private LiveData<List<Dashboard>> allDashboards;
     private LiveData<List<DashboardFunction>> allDashboardFunctions;
 
-    private AppDatabase database;
-
     public DashboardRepository(Application application){
-        database = AppDatabase.getInstance(application);
+        AppDatabase database = AppDatabase.getInstance(application);
 
         dashboardFunctionDAO = database.dashboardFunctionDAO();
         dashboardDAO = database.dashboardDAO();
         userDAO = database.userDAO();
 
         allDashboardFunctions = dashboardFunctionDAO.getAllFunctions();
+        allDashboards = dashboardDAO.getAllDashboards();
 
     }
 
@@ -49,9 +48,8 @@ public class DashboardRepository {
         new DeleteDashboardAsyncTask(dashboardDAO).execute(dashboard);
     }
 
-    public LiveData<Dashboard> getDashboard(int username) {
-        dashboard = dashboardDAO.getDashboard(userDAO.getUser(username).getValue().getUsername());
-        return dashboard;
+    public LiveData<List<Dashboard>> getAllDashboards() {
+        return allDashboards;
     }
 
     public LiveData<List<DashboardFunction>> getAllDashboardFunctions(){

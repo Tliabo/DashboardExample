@@ -18,14 +18,13 @@ public class User {
     @ColumnInfo(name = "password")
     private String userPassword;
 
+    @ForeignKey(entity = Dashboard.class, parentColumns = "dashboard_id", childColumns = "dashboard_id")
     @ColumnInfo(name = "dashboard_id")
     private int dashboardId;
 
     public User(){
-
     }
 
-    @Ignore
     public User(int username, String password){
         this.username = username;
         this.userPassword = password;

@@ -22,7 +22,7 @@ public class DashboardFunctionAdapter
         void onItemClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -39,11 +39,9 @@ public class DashboardFunctionAdapter
             textViewFunctionName = view.findViewById(R.id.functionName);
 
             view.setOnClickListener(v -> {
-                if (listener != null){
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION){
-                        listener.onItemClick(position);
-                    }
+                int position = getAdapterPosition();
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(position);
                 }
             });
         }

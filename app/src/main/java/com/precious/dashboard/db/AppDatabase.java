@@ -23,10 +23,10 @@ import com.precious.dashboard.db.entity.User;
                 User.class,
                 Dashboard.class,
                 DashboardFunction.class
-        }, version = 1)
+        }, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
-    private static final String APP_DB_NAME = "app_database";
+    private static final String APP_DB_NAME = "appdatabase";
 
     private static AppDatabase instance;
 
@@ -34,6 +34,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract DashboardDAO dashboardDAO();
     public abstract DashboardFunctionDAO dashboardFunctionDAO();
 
+    //Singleton instance
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
             //Create or open a new SQLite database, and return it as
@@ -47,7 +48,6 @@ public abstract class AppDatabase extends RoomDatabase {
         return instance;
     }
 
-    //Singleton instance
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -56,6 +56,7 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
+    //To start with data in DB
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private UserDAO userDAO;
         private DashboardDAO dashboardDAO;
@@ -85,7 +86,7 @@ public abstract class AppDatabase extends RoomDatabase {
             dashboardFunctionDAO.insert(new DashboardFunction("Profil", R.drawable.ic_outline_person));
             dashboardFunctionDAO.insert(new DashboardFunction("default", R.drawable.ic_outline_add_circle));
 
-            dashboardDAO.insert(new Dashboard(666999, 6,"default","default","default","default","default","default","default","default"));
+            dashboardDAO.insert(new Dashboard(666999, 8,"default","default","default","default","default","default","default","default"));
 
             return null;
         }

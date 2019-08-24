@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -26,15 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardFunctionPickDialog extends AppCompatDialogFragment {
-
-    public static final String EXTRA_POS1 = "com.example.diplomarbeit.ui.shop.EXTRA_POS1";
-    public static final String EXTRA_POS2 = "com.example.diplomarbeit.ui.shop.EXTRA_POS2";
-    public static final String EXTRA_POS3 = "com.example.diplomarbeit.ui.shop.EXTRA_POS3";
-    public static final String EXTRA_POS4 = "com.example.diplomarbeit.ui.shop.EXTRA_POS4";
-    public static final String EXTRA_POS5 = "com.example.diplomarbeit.ui.shop.EXTRA_POS5";
-    public static final String EXTRA_POS6 = "com.example.diplomarbeit.ui.shop.EXTRA_POS6";
-    public static final String EXTRA_POS7 = "com.example.diplomarbeit.ui.shop.EXTRA_POS7";
-    public static final String EXTRA_POS8 = "com.example.diplomarbeit.ui.shop.EXTRA_POS8";
 
     private List<DashboardDialogItem> dialogItems = new ArrayList<>();
 
@@ -78,15 +70,18 @@ public class DashboardFunctionPickDialog extends AppCompatDialogFragment {
 
         layoutManager = new LinearLayoutManager(getContext());
         adapter = new DashboardFunctionAdapter(dialogItems);
-        recyclerView.setHasFixedSize(true);
+
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(
-                position -> dialogListener.applyFunction(
-                        dialogItems.get(position).getImageResource(),
-                        dialogItems.get(position).getFunctionName()
-                ));
+        adapter.setOnItemClickListener(position -> {
+            dialogListener.applyFunction(
+                    dialogItems.get(position).getImageResource(),
+                    dialogItems.get(position).getFunctionName()
+            );
+            getDialog().dismiss();
+        });
     }
 
     @Override
@@ -96,8 +91,7 @@ public class DashboardFunctionPickDialog extends AppCompatDialogFragment {
         try {
             dialogListener = (DialogListener) context;
         } catch (Exception e) {
-            throw new ClassCastException(context.toString() +
-                    "must implement DialogListener");
+            throw new ClassCastException(context.toString() + " must implement DialogListener");
         }
     }
 

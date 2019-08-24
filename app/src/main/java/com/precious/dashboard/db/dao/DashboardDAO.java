@@ -10,13 +10,15 @@ import androidx.room.Update;
 
 import com.precious.dashboard.db.entity.Dashboard;
 
+import java.util.List;
+
 @Dao
 public interface DashboardDAO {
 
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     void insert(Dashboard dashboard);
 
-    @Update (onConflict = OnConflictStrategy.REPLACE)
+    @Update
     void update(Dashboard dashboard);
 
     @Delete
@@ -24,5 +26,8 @@ public interface DashboardDAO {
 
     @Query("SELECT * FROM dashboard WHERE user_id = :userId")
     LiveData<Dashboard> getDashboard(int userId);
+
+    @Query("SELECT * FROM dashboard")
+    LiveData<List<Dashboard>> getAllDashboards();
 
 }
