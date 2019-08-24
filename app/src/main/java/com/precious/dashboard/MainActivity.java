@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements DashboardFunction
     private ImageButton imageButton7;
     private ImageButton imageButton8;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements DashboardFunction
     private void setImageSource(ImageButton imageButton) {
         dashboardViewModel.getAllFunctions().observe(this, dashboardFunctions -> {
             for (DashboardFunction function : dashboardFunctions) {
-                if (function.getFunctionName().equals(imageButton.getContentDescription())) {
+                if (function.getFunctionName().contentEquals(imageButton.getContentDescription())) {
                     imageButton.setImageResource(function.getFunctionIcon());
                 }
             }
@@ -182,19 +181,17 @@ public class MainActivity extends AppCompatActivity implements DashboardFunction
     @Override
     public void applyFunction(int imageSource, String functionName) {
 
-        if (imageSource >= 0 && functionName != null) {
-            for (int i = 0; i < imageButtons.size(); i++) {
-                if (imageButtons.get(i).getId() == buttonToChange) {
+        for (int i = 0; i < imageButtons.size(); i++) {
+            if (imageButtons.get(i).getId() == buttonToChange && imageSource >= 0 && functionName != null) {
 
-                    imageButtons.get(i).setImageResource(imageSource);
-                    imageButtons.get(i).setContentDescription(functionName);
+                imageButtons.get(i).setImageResource(imageSource);
+                imageButtons.get(i).setContentDescription(functionName);
 
-                    String positionBuilder = ("position" + (i + 1));
+                String positionBuilder = ("position" + (i + 1));
 
-                    updateDashboardPosition(positionBuilder, functionName);
+                updateDashboardPosition(positionBuilder, functionName);
 
-                    dashboardViewModel.update(myDashboard);
-                }
+                dashboardViewModel.update(myDashboard);
             }
         }
     }
