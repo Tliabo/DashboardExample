@@ -19,6 +19,7 @@ public class DashboardViewModel extends AndroidViewModel {
     private LiveData<List<Dashboard>> allDashboards;
     private LiveData<List<DashboardFunction>> allFunctions;
     private List<ImageButton> imageButtons;
+    private LiveData<Dashboard> dashboard;
 
     public DashboardViewModel(@NonNull Application application) {
         super(application);
@@ -57,10 +58,8 @@ public class DashboardViewModel extends AndroidViewModel {
         return allDashboards;
     }
 
-    private void addNewFunctionButton(String functionName, int imageSource){
-
-
+    public LiveData<Dashboard> getDashboard(){
+        return dashboard;
     }
-
 
 }

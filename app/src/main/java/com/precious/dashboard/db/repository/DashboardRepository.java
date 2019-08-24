@@ -22,6 +22,7 @@ public class DashboardRepository {
     private UserDAO userDAO;
 
     private LiveData<List<Dashboard>> allDashboards;
+    private LiveData<Dashboard> dashboard;
     private LiveData<List<DashboardFunction>> allDashboardFunctions;
 
     public DashboardRepository(Application application){
@@ -33,7 +34,6 @@ public class DashboardRepository {
 
         allDashboardFunctions = dashboardFunctionDAO.getAllFunctions();
         allDashboards = dashboardDAO.getAllDashboards();
-
     }
 
     public void insert(Dashboard dashboard){
